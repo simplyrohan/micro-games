@@ -1,5 +1,6 @@
 
 #include "display.h"
+// #include <SPI.h>
 
 int TFT_MAX_WIDTH;
 int TFT_MAX_HEIGHT;
@@ -247,7 +248,7 @@ int8_t m_timerId;
 #define TETROMINO_ROT_180 2
 #define TETROMINO_ROT_270 3
 
-const uint16_t TETROMINO_COLOR_MAP[7] PROGMEM = {
+uint16_t TETROMINO_COLOR_MAP[7] = {
     CYAN,   // TETROMINO_I
     GREEN,  // TETROMINO_S
     RED,    // TETROMINO_Z
@@ -257,7 +258,7 @@ const uint16_t TETROMINO_COLOR_MAP[7] PROGMEM = {
     PURPLE  // TETROMINO_T
 };
 
-const uint8_t TETROMINO_MAP[7][4][16] PROGMEM = {
+uint8_t TETROMINO_MAP[7][4][16] = {
     // TETROMINO_I
     {
         {1, 1, 1, 1,
