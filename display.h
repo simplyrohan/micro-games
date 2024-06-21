@@ -1,3 +1,5 @@
+#ifndef DISPLAY_H
+#define DISPLAY_H
 // display.h
 // Display setup and calls
 // Map your display to each function and all games will work
@@ -10,7 +12,7 @@
 #define TFT_MOSI 11 // MOSI/SDA
 #define TFT_CS 10   // Chip Select
 #define TFT_DC 8    // DC/RS
-#define TFT_RST -1      // RESET (-1 for hardware RESET pin)
+#define TFT_RST -1  // RESET (-1 for hardware RESET pin)
 
 Adafruit_ST7735 display = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
 
@@ -26,6 +28,7 @@ Adafruit_ST7735 display = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
 void setupScreen()
 {
     display.initR(INITR_BLACKTAB);
+    delay(1000);
     display.fillScreen(ST7735_BLACK);
 }
 
@@ -77,7 +80,6 @@ void drawString(int x, int y, char *c, uint16_t color, uint8_t size = 1)
     display.print(c);
 }
 
-
 void drawBitmap(int x, int y, const uint8_t *bitmap, int w, int h, uint16_t color)
 {
     display.drawBitmap(x, y, bitmap, w, h, color);
@@ -96,6 +98,36 @@ void setRotation(uint8_t rotation)
 void setCursor(int x, int y)
 {
     display.setCursor(x, y);
+}
+
+void print(char *c)
+{
+    display.print(c);
+}
+
+void print(int i)
+{
+    display.print(i);
+}
+
+void print(float f)
+{
+    display.print(f);
+}
+
+void println(char *c)
+{
+    display.println(c);
+}
+
+void println(int i)
+{
+    display.println(i);
+}
+
+void println(float f)
+{
+    display.println(f);
 }
 
 void setTextColor(uint16_t color)
@@ -217,3 +249,4 @@ void invertDisplay(boolean i)
 {
     display.invertDisplay(i);
 }
+#endif
