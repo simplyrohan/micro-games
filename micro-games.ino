@@ -13,7 +13,7 @@ void setup()
 
     // Serial.println("Hardware initialized and i hate you");
 
-    setupLauncher(&tft);
+    setupLauncher();
 }
 
 void loop()
@@ -23,7 +23,7 @@ void loop()
     Serial.println("Looping...");
     if (gameRunning == -1)
     {
-        gameRunning = loopLauncher(&tft, keys);
+        gameRunning = loopLauncher();
     }
     else
     {

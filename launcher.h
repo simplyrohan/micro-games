@@ -1,5 +1,6 @@
 #include <Adafruit_GFX.h>
 #include "defines.h"
+#include "hardware.h"
 #include "games/snake.h"
 #include "games/pong.h"
 
@@ -28,29 +29,29 @@ int numberOfGames = 2;
 
 int cooldown = 0;
 
-void setupLauncher(Adafruit_GFX *tft)
+void setupLauncher()
 {
-    tft->fillScreen(BLACK);
+    tft.fillScreen(BLACK);
     for (int i = 0; i < numberOfGames; i++)
     {
-        tft->setCursor(20, i * 22);
-        tft->setTextSize(2);
+        tft.setCursor(20, i * 22);
+        tft.setTextSize(2);
         if (i == selectionIndex)
         {
-            tft->fillRect(0, i * 22, 240, 20, WHITE);
-            tft->setTextColor(BLACK);
-            tft->print(gameNames[i]);
+            tft.fillRect(0, i * 22, 240, 20, WHITE);
+            tft.setTextColor(BLACK);
+            tft.print(gameNames[i]);
         }
         else
         {
-            tft->drawRect(0, i * 22, 240, 20, WHITE);
-            tft->setTextColor(WHITE);
-            tft->print(gameNames[i]);
+            tft.drawRect(0, i * 22, 240, 20, WHITE);
+            tft.setTextColor(WHITE);
+            tft.print(gameNames[i]);
         }
     }
 }
 
-int loopLauncher(Adafruit_GFX *tft, bool keys[7])
+int loopLauncher()
 {
     if (keys[KEY_UP] && cooldown == 0)
     {
@@ -63,7 +64,7 @@ int loopLauncher(Adafruit_GFX *tft, bool keys[7])
         {
             selectionIndex = numberOfGames - 1;
         }
-        setupLauncher(tft);
+        setupLauncher();
     }
     if (keys[KEY_DOWN] && cooldown == 0)
     {
@@ -76,11 +77,12 @@ int loopLauncher(Adafruit_GFX *tft, bool keys[7])
         {
             selectionIndex = 0;
         }
-        setupLauncher(tft);
+        setupLauncher();
     }
 
-    if (keys[KEY_A]) {
-        gameSetups[selectionIndex](tft);
+    if (keys[KEY_A])
+    {
+        gameSetups[selectionIndex](&tft);
         return selectionIndex;
     }
 
