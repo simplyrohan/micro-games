@@ -8,16 +8,17 @@ void setup()
 {
     Serial.begin(115200);
 
-    // Serial.println("Starting hardware... BRO");
+    Serial.println("Starting and plz stop crashing");
     setupHardware();
 
-    // Serial.println("Hardware initialized and i hate you");
+    Serial.println("Hardware initialized");
 
     setupLauncher();
 }
 
 void loop()
 {
+    int frameStart = millis();
     get_keys();
 
     Serial.println("Looping...");
@@ -36,5 +37,12 @@ void loop()
     //     get_keys();
     //     gameKeys[gameRunning](keys);
     // }
-    delay(1000 / FPS);
+    int frameEnd = millis();
+    // delay(1000 / FPS - (frameEnd - frameStart));
+    tft.setCursor(0, 0);
+    tft.setTextSize(1.5);
+    tft.setTextColor(WHITE, BLACK);
+    tft.print(1000 / (frameEnd - frameStart));
+    tft.print(" FPS");
+
 }

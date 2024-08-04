@@ -27,7 +27,7 @@ String gameNames[] = {
 
 int numberOfGames = 2;
 
-int cooldown = 0;
+int selectionCooldown = 0;
 
 void setupLauncher()
 {
@@ -53,11 +53,11 @@ void setupLauncher()
 
 int loopLauncher()
 {
-    if (keys[KEY_UP] && cooldown == 0)
+    if (keys[KEY_UP] && selectionCooldown == 0)
     {
         Serial.println("UP");
 
-        cooldown = 10;
+        selectionCooldown = 10;
 
         selectionIndex--;
         if (selectionIndex < 0)
@@ -66,11 +66,11 @@ int loopLauncher()
         }
         setupLauncher();
     }
-    if (keys[KEY_DOWN] && cooldown == 0)
+    if (keys[KEY_DOWN] && selectionCooldown == 0)
     {
         Serial.println("DOWN");
 
-        cooldown = 10;
+        selectionCooldown = 10;
 
         selectionIndex++;
         if (selectionIndex >= numberOfGames)
@@ -86,7 +86,7 @@ int loopLauncher()
         return selectionIndex;
     }
 
-    cooldown = max(0, cooldown - 1);
+    selectionCooldown = std::max(0, selectionCooldown - 1);
 
     return -1;
 }
