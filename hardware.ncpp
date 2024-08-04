@@ -1,0 +1,12 @@
+#include "hardware.h"
+
+SPIClass spi(HSPI);
+Adafruit_ST7789 tft = Adafruit_ST7789(&spi, TFT_CS, TFT_DC, TFT_RST);
+
+int shift_clock = A3;
+int shift_data = A1; // DS
+int shift_latch = A2;
+
+int shift_inp = A0;
+
+bool keys[7] = {0, 0, 0, 0, 0, 0, 0};
